@@ -12,13 +12,7 @@ setup-libs = { depends-on = ["build-vsg", "build-blaze"] }
 
 configure-chrono = "rm -rf build"
 cmake-chrono = { cmd = [
-    "cmake",
-    "-G",
-    "Ninja",
-    "-S",
-    ".",
-    "-B", 
-    "build",
+    "cmake -G Ninja -S . -B build",
     "-DCMAKE_BUILD_TYPE=Release",
     "-DCMAKE_INSTALL_PREFIX=install",
     "-DCMAKE_PREFIX_PATH=$CONDA_PREFIX",

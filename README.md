@@ -1,7 +1,7 @@
 
 This fork is configured using the [pixi](https://pixi.sh/) package manager. To install, simply run,
 ```
-git clone git@github.com:henrynoyes/chrono.git -b vsg-dev
+git clone git@github.com:henrynoyes/chrono.git # defaults to vsg-dev branch
 cd chrono
 pixi install
 pixi run setup-libs
