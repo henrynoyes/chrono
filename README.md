@@ -1,3 +1,24 @@
+
+This fork is configured using the [pixi](https://pixi.sh/) package manager. To install, simply run,
+```
+git clone git@github.com:henrynoyes/chrono.git -b vsg-dev
+cd chrono
+pixi install
+pixi run setup-libs
+pixi run build-chrono
+```
+
+To run demos,
+```
+pixi shell
+cd build/bin
+./demo_FSI_BCE
+```
+
+Tested on Ubuntu 22.04, CUDA 12.9, GCC 13
+
+---
+
 Project CHRONO
 ==============
 
