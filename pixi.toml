@@ -1,0 +1,87 @@
+[workspace]
+authors = ["Henry Noyes <noyes.he@northeastern.edu>"]
+channels = ["conda-forge"]
+name = "chrono"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[tasks]
+build-vsg = "cd VSG && ./pixiBuildVSG.sh"
+build-blaze = "cd Blaze && ./pixiBuildBlaze.sh"
+setup-libs = { depends-on = ["build-vsg", "build-blaze"] }
+
+build-chrono = """
+rm -r build && mkdir build && cd build && \
+cmake .. \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=../install \
+    -DCMAKE_PREFIX_PATH=${CONDA_PREFIX} \
+    -DCH_ENABLE_MODULE_GPU=ON \
+    -DCH_ENABLE_MODULE_FSI=ON \
+    -DCH_ENABLE_MODULE_SENSOR=OFF \
+    -DCH_ENABLE_MODULE_VSG=ON \
+    -DCH_ENABLE_MODULE_IRRLICHT=OFF \
+    -DCH_ENABLE_MODULE_VEHICLE=ON \
+    -DCH_ENABLE_MODULE_MULTICORE=ON \
+    -DCH_ENABLE_OPENMP=ON \
+    -DCHRONO_CUDA_ARCHITECTURES=all-major \
+    -DBUILD_DEMOS=ON \
+    -Dvsg_DIR=${CONDA_PREFIX}/lib/cmake/vsg \
+    -DvsgImGui_DIR=${CONDA_PREFIX}/lib/cmake/vsgImGui \
+    -DvsgXchange_DIR=${CONDA_PREFIX}/lib/cmake/vsgXchange \
+    -G Ninja && \
+ninja -j20 -k 0
+"""
+
+
+[dependencies]
+# Core build dependencies
+cmake = ">=3.18"
+make = ">=4.0"
+gcc = "14.*"
+gxx = "14.*"
+ninja = ">=1.10"
+
+# Chrono dependencies
+eigen = ">=3.4.0"
+git = ">=2.25"
+
+# OpenMP support
+openmp = ">=4.5"
+
+# Development tools
+gdb = ">=9.0"
+pkg-config = ">=0.29"
+
+# FSI module dependencies
+hdf5 = "*"
+
+# Additional math libraries
+openblas = "*"
+fftw = "*"
+
+# OpenMPI support
+openmpi = "*"
+
+# VSG Visualization
+libvulkan-loader = "*"
+libvulkan-headers = "*"
+vulkan-tools = "*"
+vulkan-validation-layers = "*"
+glslang = "*"
+shaderc = "*"
+
+# CUDA
+# cuda-toolkit = "*"
+# cuda-cudart = "*"
+# cuda-nvcc = "*"
+# libcublas = "*"
+# libcusparse = "*"
+# libcurand = "*"
+
+# X11
+xorg-libxcb = "*"
+xorg-libx11 = "*"
+xorg-xproto = "*"
+xorg-libxau = "*"
+xorg-libxdmcp = "*"

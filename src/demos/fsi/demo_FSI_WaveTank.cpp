@@ -33,6 +33,7 @@
 #include "chrono/fea/ChElementShellANCF_3423.h"
 
 #include "chrono_fsi/sph/ChFsiProblemSPH.h"
+#include "chrono/solver/ChIterativeSolverLS.h"
 
 #ifdef CHRONO_PARDISO_MKL
     #include "chrono_pardisomkl/ChSolverPardisoMKL.h"

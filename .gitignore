@@ -105,3 +105,7 @@ build_chrono_website.sh
 .htaccess
 refman.pdf
 src/chrono_granular/DoxyGenDocs/
+
+# pixi environments
+.pixi
+*.egg-info
